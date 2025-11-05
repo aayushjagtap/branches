@@ -1,0 +1,7 @@
+﻿node_modules/
+.env*
+.vscode/
+__pycache__/
+.mypy_cache/
+.coverage
+

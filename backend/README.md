@@ -1,0 +1,1 @@
+﻿Backend app (FastAPI + PostgreSQL)

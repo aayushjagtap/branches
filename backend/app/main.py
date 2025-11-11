@@ -1,8 +1,10 @@
-﻿from fastapi import FastAPI
+﻿from app.api import auth
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
 
 app = FastAPI(title="Branches API")
+app.include_router(auth.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,3 +23,7 @@ app.add_middleware(
 def health():
     logger.info("Health check hit")
     return {"status": "ok"}
+
+@app.get("/")
+def root():
+    return {"message": "Branches API running", "try": "/health"}

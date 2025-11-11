@@ -5,7 +5,7 @@ Built with **React + TypeScript (Vite)** on the frontend and **FastAPI (Python)*
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |--------|-------------|
@@ -17,7 +17,7 @@ Built with **React + TypeScript (Vite)** on the frontend and **FastAPI (Python)*
 
 ---
 
-## ⚙️ Quick Start (Local)
+## Quick Start (Local)
 
 ### 1. Prerequisites
 - Node.js 18+ and npm

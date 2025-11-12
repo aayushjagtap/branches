@@ -1,3 +1,4 @@
 ﻿dev.db
 __pycache__/
 *.sqlite
+.venv/

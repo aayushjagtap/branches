@@ -2,10 +2,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
+from app.db.database import engine, Base
+from app.db import models
 
 app = FastAPI(title="Branches API")
 app.include_router(auth.router)
 
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)
+    logger.info("DB tables ensured")
+    
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

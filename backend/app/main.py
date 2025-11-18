@@ -1,18 +1,32 @@
-﻿from app.api import auth
-from fastapi import FastAPI
+﻿from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
+
+from app.api import auth, boards
 from app.db.database import engine, Base
-from app.db import models
 
+# ---------------------------------------------------
+# Create FastAPI app FIRST
+# ---------------------------------------------------
 app = FastAPI(title="Branches API")
-app.include_router(auth.router)
 
+# ---------------------------------------------------
+# Include routers
+# ---------------------------------------------------
+app.include_router(auth.router)      # /auth/login, /auth/me etc.
+app.include_router(boards.router)    # /boards and /boards/.../columns
+
+# ---------------------------------------------------
+# Database startup
+# ---------------------------------------------------
 @app.on_event("startup")
 def on_startup():
     Base.metadata.create_all(bind=engine)
     logger.info("DB tables ensured")
-    
+
+# ---------------------------------------------------
+# CORS
+# ---------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -26,6 +40,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ---------------------------------------------------
+# Health check
+# ---------------------------------------------------
 @app.get("/health")
 def health():
     logger.info("Health check hit")
